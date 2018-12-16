@@ -10,13 +10,43 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <!-- My CSS -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Basic RPG Game</title>
 </head>
 
 <body>
+    <!-- main-div -->
     <div id="main-div" class="container-fluid">
+
+        <!-- title-div row -->
+        <div id="title-div" class="row mt-5">
+
+            <div class="col-md-12 text-center">
+                <h1>Pokemon Arena</h1>
+            </div>
+
+        </div> <!-- End of title-dev -->
+
+        <!-- Charater Selection -->
+        <div id="intructions" class="container text-center mt-3">
+            <p>Choose your poke</p>
+        </div>
+
+        <!-- Characters -->
+        <div id="char-select" class="d-flex justify-content-center mt-5">
+            <!-- populate image of character here -->
+        </div>
+
+        <!-- Arena -->
+        <div id="arena" class="arena-set row my-3 mx-auto p-3">
+            <div id="hero" class="col-md-6 d-flex align-items-end">
+                <img src="./assets/images/char-back.gif" class="char-arena">
+            </div>
+            <div id="enemy" class="col-md-6 d-flex flex-row-reverse">
+                <img src="./assets/images/char-front.gif" class="char-arena">
+            </div>
+        </div>
 
     </div> <!-- end of main-div -->
 
@@ -29,7 +59,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <!-- My JS -->
-    <script src="./javascript/script.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 
 </body>
 
