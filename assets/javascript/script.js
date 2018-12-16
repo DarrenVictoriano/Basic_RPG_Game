@@ -102,6 +102,22 @@ function randomNum(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+function heroAlignment(name, alignment) {
+    if (alignment === "hero") {
+        for (i in characters) {
+            if (characters[i].name == name) {
+                gameData.hero = characters[i];
+            }
+        }
+    } else {
+        for (i in characters) {
+            if (characters[i].name == name) {
+                gameData.enemy = characters[i];
+            }
+        }
+    }
+
+}
 
 
 /////////////////////////////////////////////
@@ -122,7 +138,7 @@ function populateArena(container, alignment) {
         facing = "back"
     }
 
-    container.append("<img src=" + gameData[alignment].image[facing] + " />");
+    container.append("<img src=" + gameData[alignment].image[facing] + " class='char-arena' />");
 }
 
 
@@ -131,13 +147,45 @@ function populateArena(container, alignment) {
 /////////////////////////////////////////////
 varInit();
 populateCharSelect();
-$(".characters").on("click", function () {
-    var x = $(this).attr("alt");
-    for (i in characters) {
-        if (characters[i].name == x) {
-            gameData.hero = characters[i];
-        }
+
+$(".char-container").on("click", function () {
+
+    // get the image alt name which is a child of .char-container
+    var name = $(this).children("img").attr("alt");
+
+    switch (gameData.step) {
+
+        case 1:
+            // give the character to the gameData var
+            heroAlignment(name, "hero");
+
+            // remove the image after click
+            $(this).remove();
+
+            // move the image to the arena
+            populateArena($("#hero"), "hero");
+
+            gameData.step = 2;
+            break;
+
+        case 2:
+            // give the character to the gameData var
+            heroAlignment(name, "enemy");
+
+            // remove the image after click
+            $(this).remove();
+
+            //hide remaining characters
+            $(".char-container").hide();
+
+            // move the image to the arena
+            populateArena($("#enemy"), "enemy");
     }
+
+
     console.log(gameData.hero.name)
     console.log(gameData.hero.attack[0].name)
+
+    console.log(gameData.enemy.name)
+    console.log(gameData.enemy.attack[0].name)
 });
