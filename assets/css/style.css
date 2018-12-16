@@ -2,7 +2,7 @@ body {
     background-color: #E9ECEF;
 }
 
-#char-select {
+.char-select {
     height: 300px;
 }
 
@@ -37,5 +37,19 @@ body {
 }
 
 .char-arena {
-    height: 100px;
+    height: 100px; 
+}
+
+.mt-hero {
+    margin-top: 120px;
+}
+
+.mt-enemy {
+    margin-left: auto;
+    margin-bottom: 80px;
+}
+
+.hp-stat {
+    background-color: #E9ECEF;
+    border-radius: 5px;
 }

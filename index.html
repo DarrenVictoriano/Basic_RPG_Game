@@ -29,22 +29,45 @@
         </div> <!-- End of title-dev -->
 
         <!-- Charater Selection -->
-        <div id="intructions" class="container text-center mt-3">
+        <div id="intructions" class="container text-center my-3">
             <p>Choose your poke</p>
         </div>
 
         <!-- Characters -->
-        <div id="char-select" class="d-flex justify-content-center">
+        <div id="char-select" class="d-flex justify-content-center char-select">
             <!-- populate image of character here -->
         </div>
 
         <!-- Arena -->
-        <div id="arena" class="arena-set row mx-auto pb-3 pt-5 pl-3 pr-5">
-            <div id="hero" class="col-md-6 d-flex align-items-end">
-                <!--Hero spot -->
+        <div id="arena" class="row mx-auto pb-3 pt-5 pl-3 pr-5">
+
+            <div class="col-md-6">
+
+                <div class="row">
+                    <div id="hero-hp-div" class="p-2">
+                        <!-- Hero HP bar spot -->
+                    </div>
+                </div>
+                <div id="hero" class="row d-flex flex-row">
+                    <!--Hero spot -->
+                </div>
             </div>
-            <div id="enemy" class="col-md-6 d-flex flex-row-reverse mt-5">
-                <!-- Enemy Spot -->>
+
+            <div class="col-md-6 mt-5">
+                <div id="enemy" class="row">
+                    <!-- Enemy Spot -->
+                </div>
+                <div class="row">
+                    <div id="enemy-hp-div" class="p-2 ml-auto">
+                        <!-- Enemy HP bar spot -->
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- End of Arena DIV -->
+        <div class="row">
+            <div id="attack-div" class="col-md-12 text-center mt-5">
+
             </div>
         </div>
 

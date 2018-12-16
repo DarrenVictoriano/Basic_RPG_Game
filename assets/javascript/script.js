@@ -133,12 +133,32 @@ function populateCharSelect() {
 
 function populateArena(container, alignment) {
     var facing = 'front';
+    var margin = 'mt-enemy'
 
     if (alignment == "hero") {
         facing = "back"
+        margin = 'mt-hero';
     }
 
-    container.append("<img src=" + gameData[alignment].image[facing] + " class='char-arena' />");
+    container.append("<img src=" + gameData[alignment].image[facing] + " class='char-arena " + margin + "' />");
+}
+
+function createHPbar(alignment) {
+
+    if (alignment == "hero") {
+        $("#hero-hp-div").addClass("hp-stat");
+        $("#hero-hp-div").append("<p id='hero-name' class='m-0'>" + gameData.hero.name + "</p><progress id='hero-progress' max='" + gameData.hero.hp.current + "'></progress><div id='hero-hp'></div>");
+        $("#hero-hp").text(gameData.hero.hp.current + "/" + gameData.hero.hp.total);
+    } else if (alignment == "enemy") {
+        $("#enemy-hp-div").addClass("hp-stat");
+        $("#enemy-hp-div").append("<p id='enemy-name' class='m-0'>" + gameData.enemy.name + "</p><progress id='enemy-progress' max='" + gameData.enemy.hp.current + "'></progress><div id='enemy-hp'></div>");
+        $("#enemy-hp").text(gameData.enemy.hp.current + "/" + gameData.enemy.hp.total);
+
+    }
+}
+
+function showAttackBTN() {
+    $("#attack-div").append("<button id='attack-btn' class='btn btn-danger'>Attack that shit!</button>")
 }
 
 
@@ -162,8 +182,12 @@ $(".char-container").on("click", function () {
             // remove the image after click
             $(this).remove();
 
+            //create arena then
+            $("#arena").addClass("arena-set");
             // move the image to the arena
             populateArena($("#hero"), "hero");
+            // add hero hp bar to the arena
+            createHPbar("hero");
 
             gameData.step = 2;
             break;
@@ -176,10 +200,15 @@ $(".char-container").on("click", function () {
             $(this).remove();
 
             //hide remaining characters
+            $("#char-select").removeClass("char-select");
             $(".char-container").hide();
 
             // move the image to the arena
             populateArena($("#enemy"), "enemy");
+            // add enemy hp bar to the arena
+            createHPbar("enemy");
+            //show attack button
+            showAttackBTN();
     }
 
 
