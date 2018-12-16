@@ -126,7 +126,7 @@ function heroAlignment(name, alignment) {
 function populateCharSelect() {
     for (i in characters) {
         $("#char-select").append(
-            "<div class='char-container img-fluid text-center mx-5'><img class='characters' src=" + characters[i].image.icon + " alt=" + characters[i].name + " /><h4 class='char-text'>" + characters[i].name + "</h4></div>"
+            "<div class='char-container justify-content-center align-self-center text-center'><img class='characters img-fluid' src=" + characters[i].image.icon + " alt=" + characters[i].name + " /><h4 class='char-text'>" + characters[i].name + "</h4></div>"
         );
     }
 }

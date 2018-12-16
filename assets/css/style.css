@@ -2,7 +2,12 @@ body {
     background-color: #E9ECEF;
 }
 
+#char-select {
+    height: 300px;
+}
+
 .char-container {
+    width: 300px;
     transition: transform 0.3s ease, margin 0.3s ease, font-size 0.1s ease;
 }
 
