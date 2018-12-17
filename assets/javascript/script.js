@@ -117,9 +117,6 @@ function attackTheEnemy() {
     gameData.enemy.hp.current -= gameData.hero.attack.damage;
 
     if (gameData.enemy.hp.current <= 0) {
-        // enemy is dead
-        gameData.step = 2;
-
         //remove dead
         $("#enemy-hp-div").empty();
         $("#enemy-hp-div").removeClass("hp-stat");
@@ -128,8 +125,18 @@ function attackTheEnemy() {
         //show character select
         $("#char-select").addClass("char-select");
         $(".char-container").show();
+
+        // change instruction
+        $("#instructions").html("<h3>Choose your Enemy!</h3>");
+
+        // enemy is dead
+        gameData.step = 2;
+
     } else {
         // enemy is still alive, kill!
+
+        // animate hero
+        animateAttack("hero");
 
         //animate health bar
         progressIntEnemy = setInterval(function () {
@@ -155,8 +162,8 @@ function attackTheHero() {
     gameData.hero.hp.current -= gameData.enemy.attack.damage;
 
     if (gameData.hero.hp.current <= 0) {
-        // hero is dead
-        gameData.step = 2;
+        // hero is dead game over
+        gameOver();
 
         //remove dead
         $("#hero-hp-div").empty();
@@ -168,6 +175,9 @@ function attackTheHero() {
         $(".char-container").show();
     } else {
         // hero is still alive
+
+        // animate enemy
+        animateAttack("enemy");
 
         //animate health bar
         progressIntHero = setInterval(function () {
@@ -189,6 +199,14 @@ function attackTheHero() {
     }
 }
 
+function gameOver() {
+    //hide remaining characters
+    $("#char-select").empty();
+    $("#attack-div").empty();
+    $("#arena").empty();
+    $("#arena").removeClass("arena-set");
+    $("#instructions").html("<h2>Game Over!</h2>");
+}
 
 /////////////////////////////////////////////
 // Game Interface
@@ -232,6 +250,53 @@ function showAttackBTN() {
     $("#attack-div").html("<button id='attack-btn' class='btn btn-danger'>Attack that shit!</button>")
 }
 
+function animateAttack(who) {
+    if (who == "hero") {
+        $(".mt-hero").animate(
+            {
+                'height': '120px'
+            },
+            50,
+            "swing"
+        );
+        $(".mt-hero").animate(
+            {
+                'height': '50px'
+            },
+            50,
+            "swing"
+        );
+        $(".mt-hero").animate(
+            {
+                'height': '100px'
+            },
+            50,
+            "swing"
+        );
+    } else {
+        $(".mt-enemy").animate(
+            {
+                'height': '120px'
+            },
+            50,
+            "swing"
+        );
+        $(".mt-enemy").animate(
+            {
+                'height': '50px'
+            },
+            50,
+            "swing"
+        );
+        $(".mt-enemy").animate(
+            {
+                'height': '100px'
+            },
+            50,
+            "swing"
+        );
+    }
+}
 
 /////////////////////////////////////////////
 // Start Game
@@ -259,11 +324,12 @@ function startGame() {
                 // add hero hp bar to the arena
                 createHPbar("hero");
 
+                // change instruction
+                $("#instructions").html("<h3>Choose your Enemy!</h3>");
                 gameData.step = 2;
                 break;
 
             case 2:
-
                 // give the character to the gameData var
                 heroAlignment(name, "enemy");
 
@@ -281,6 +347,9 @@ function startGame() {
                 //show attack button
                 showAttackBTN();
 
+                // change instructions
+                $("#instructions").html("<h3>Fight!</h3>");
+
                 // update game step
                 gameData.step = 3;
                 break;
@@ -293,7 +362,9 @@ function startGame() {
 
 $("#attack-div").on("click", "#attack-btn", function () {
     attackTheEnemy();
-    attackTheHero();
+
+    setTimeout(attackTheHero, 1000);
+
 });
 
 varInit();

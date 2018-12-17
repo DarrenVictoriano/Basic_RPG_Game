@@ -2,6 +2,10 @@ body {
     background-color: #E9ECEF;
 }
 
+.logo {
+    max-width: 400px;
+}
+
 .char-select {
     height: 300px;
 }
