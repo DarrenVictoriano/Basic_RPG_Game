@@ -21,7 +21,7 @@ function varInit() {
             },
             attack: {
                 name: "Pika Lightning",
-                damage: randomNum(20, 50)
+                damage: randomNum(50, 100)
             },
             image: {
                 icon: "./assets/images/pika.png",
@@ -38,7 +38,7 @@ function varInit() {
             },
             attack: {
                 name: "Charmander Fire",
-                damage: randomNum(20, 50)
+                damage: randomNum(50, 100)
             },
             image: {
                 icon: "./assets/images/char.png",
@@ -55,7 +55,7 @@ function varInit() {
             },
             attack: {
                 name: "Squirtle Squirt",
-                damage: randomNum(20, 50)
+                damage: randomNum(50, 100)
             },
             image: {
                 icon: "./assets/images/tur.png",
@@ -72,7 +72,7 @@ function varInit() {
             },
             attack: {
                 name: "Bulba Bur",
-                damage: randomNum(20, 50)
+                damage: randomNum(50, 100)
             },
             image: {
                 icon: "./assets/images/bulba.png",
@@ -117,6 +117,7 @@ function heroAlignment(name, alignment) {
 
 function attackTheEnemy() {
     gameData.enemy.hp.current -= gameData.hero.attack.damage;
+    //gameData.enemy.hp.current -= 200;
 
     if (gameData.enemy.hp.current <= 0) {
         //remove dead
@@ -160,10 +161,18 @@ function attackTheEnemy() {
             }
         }, 1);
     }
+    $("#attack-btn").prop("disabled", true);
 }
 
 function attackTheHero() {
-    gameData.hero.hp.current -= gameData.enemy.attack.damage;
+    $("#attack-btn").prop("disabled", false);
+
+    if (gameData.enemy.hp.current <= 0) {
+        gameData.hero.hp.current -= 1;
+    } else {
+        gameData.hero.hp.current -= gameData.enemy.attack.damage;
+    }
+
 
     if (gameData.hero.hp.current <= 0) {
         // hero is dead game over
