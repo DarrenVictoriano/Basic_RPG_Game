@@ -3,8 +3,8 @@
 /////////////////////////////////////////////
 var characters = [],
     gameData = {},
-    progressIntHero = null,
-    progressIntEnemy = null;
+    progressIntHero,
+    progressIntEnemy;
 
 
 /////////////////////////////////////////////
@@ -85,7 +85,9 @@ function varInit() {
         step: 1,
         hero: {},
         enemy: {}
-    }
+    };
+    progressIntHero = null;
+    progressIntEnemy = null;
 }
 
 /////////////////////////////////////////////
@@ -128,6 +130,8 @@ function attackTheEnemy() {
 
         // change instruction
         $("#instructions").html("<h3>Choose your Enemy!</h3>");
+
+        clearInterval(progressIntEnemy);
 
         // enemy is dead
         gameData.step = 2;
@@ -173,6 +177,8 @@ function attackTheHero() {
         //show character select
         $("#char-select").addClass("char-select");
         $(".char-container").show();
+
+        clearInterval(progressIntHero);
     } else {
         // hero is still alive
 
@@ -203,9 +209,33 @@ function gameOver() {
     //hide remaining characters
     $("#char-select").empty();
     $("#attack-div").empty();
-    $("#arena").empty();
     $("#arena").removeClass("arena-set");
+    $("#hero-hp-div").empty();
+    $("#hero").empty();
+    $("#enemy-hp-div").empty();
+    $("#enemy").empty();
     $("#instructions").html("<h2>Game Over!</h2>");
+}
+
+function resetGame() {
+    // initialize variables
+    varInit();
+
+    // clear the arena
+    $("#hero-hp-div").empty();
+    $("#hero").empty();
+    $("#enemy-hp-div").empty();
+    $("#enemy").empty();
+
+    // empty characters
+    $("#char-select").removeClass("arena-set");
+
+    // update instructions
+    $("#instructions").html("<h3>Choose your poke</h3>");
+
+    populateCharSelect();
+    gameData.step = 1;
+    startGame();
 }
 
 /////////////////////////////////////////////
@@ -365,6 +395,10 @@ $("#attack-div").on("click", "#attack-btn", function () {
 
     setTimeout(attackTheHero, 1000);
 
+});
+
+$("#pokemon-logo").on("click", function () {
+    resetGame();
 });
 
 varInit();
