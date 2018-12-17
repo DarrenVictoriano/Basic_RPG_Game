@@ -228,10 +228,11 @@ function resetGame() {
     $("#enemy").empty();
 
     // empty characters
+    $("#char-select").empty();
     $("#char-select").removeClass("arena-set");
 
     // update instructions
-    $("#instructions").html("<h3>Choose your poke</h3>");
+    $("#instructions").html("<h3>Choose your poke!</h3>");
 
     populateCharSelect();
     gameData.step = 1;
